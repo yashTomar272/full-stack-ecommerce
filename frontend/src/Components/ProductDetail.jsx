@@ -10,9 +10,10 @@ export default function ProductDetail(){
    const navigate=useNavigate();
    const [Data,setData]=useState([]);
    const [date,setDate]=useState([]);
+   const URL = process.env.REACT_APP_URL;
    useEffect(()=>{
      const fetchData=async()=>{
-       const response=await axios.get("http://localhost:8000/get-all-book");
+       const response=await axios.get(`${URL}/get-all-book`);
        const datesArray = response.data.data.map((book) => {
         return new Date(book.createdAt).toLocaleDateString("en-US", {
           month: "short",
@@ -27,7 +28,7 @@ export default function ProductDetail(){
    },[])
    
    const deleteProduct=async(idd)=>{
-    const response=await axios.delete("/delete-book", {
+    const response=await axios.delete(`${URL}/delete-book`  , {
       headers: {
         id: localStorage.getItem("id"),
         authorization: `Bearer ${localStorage.getItem("token")}`,

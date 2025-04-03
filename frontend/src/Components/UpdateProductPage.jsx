@@ -7,7 +7,7 @@ import {  toast } from "react-toastify";
  export default function UpdateProductPage(){
    
    const { id } = useParams();
-   
+   const URL = process.env.REACT_APP_URL;
    const navigate=useNavigate();
  const [Data,setData]=useState({
   title:"",
@@ -39,7 +39,7 @@ const headers={
 
 useEffect(()=>{
   const fetchData=async()=>{
-    const response=await axios.get(`/get-book-by-id/${id}`)
+    const response=await axios.get(`${URL}/get-book-by-id/${id}`)
 setData(response.data.data)
   }
   fetchData();
@@ -57,7 +57,7 @@ if(
 ){
   alert("All fields are required")
 }
-const response=await axios.put("/update-book",
+const response=await axios.put(`${URL}/update-book`,
   Data,
 {headers});
 setData({

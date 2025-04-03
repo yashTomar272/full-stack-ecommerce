@@ -18,6 +18,7 @@ import { TbLogout } from "react-icons/tb";
 
 
 export default function AdminDashboard() {
+  const URL = process.env.REACT_APP_URL;
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const [totaluser,setTotalUser]=useState();
@@ -33,10 +34,10 @@ const [count,setCount]=useState("")
   }
   useEffect(()=>{
      const fetch=async()=>{
-const response=await axios.get("/get-user-information",{headers});
-const Response=await axios.get("/get-all-book");
-const tuser=await axios.get("/get-all-user");
-const OrderRes=await axios.get("/get-all-orders",{headers});
+const response=await axios.get(`${URL}/get-user-information`,{headers});
+const Response=await axios.get(`${URL}/get-all-book`);
+const tuser=await axios.get(`${URL}/get-all-user`);
+const OrderRes=await axios.get(`${URL}/get-all-orders`,{headers});
 setTotalOrder(OrderRes.data.data.length);
 setTotalUser(tuser.data.data.length)
 setCount(Response.data.data.length);

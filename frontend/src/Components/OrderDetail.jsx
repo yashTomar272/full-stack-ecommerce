@@ -12,10 +12,11 @@ export default function (){
   const [date,setDate]=useState([]);
  const [Options,setOptions]=useState();
 const [Values, setValues] = useState({status:""})
+const URL = process.env.REACT_APP_URL;
 console.log("data",Data)
   useEffect(()=>{
     const fetchData=async()=>{
-      const response=await axios.get("/get-all-orders",{
+      const response=await axios.get( `${URL}/get-all-orders`,{
         headers:{
           id:localStorage.getItem("id"),
           authorization:`Bearer ${localStorage.getItem("token")}`
@@ -43,7 +44,7 @@ console.log("data",Data)
   }
   const submitChange=async(i)=>{
 const id = Data[i]._id;
-const response=await axios.put(`/update-status/${id}`,
+const response=await axios.put(`${URL}/update-status/${id}`,
   Values,{
     headers:{
       id:localStorage.getItem("id"),

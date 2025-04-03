@@ -18,13 +18,14 @@ export default function Navbar() {
 
 
   const navigate=useNavigate()
+const URL = process.env.REACT_APP_URL;
  
   const [cartItems,setcartItems]=useState([]);
   
   useEffect(() => {
    const fetchCart = async () => {
      try {
-       const response = await axios.get("/get-to-cart", {
+       const response = await axios.get(`${URL}/get-to-cart`, {
          headers: {
            id: localStorage.getItem("id"),
            authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -62,7 +63,7 @@ useEffect(() => {
   const fetchSearchResults = async () => {
     if (search) {  // Agar search term available hai
       try {
-        const response = await axios.get(`/search-books?query=${search}`);
+        const response = await axios.get(`${URL}/search-books?query=${search}`);
         setSearchResults(response.data.data);  // Response se products ko set karna
         console.log("hello",response.data.data);  // Response se products ko set karna
 

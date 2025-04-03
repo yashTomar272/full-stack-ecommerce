@@ -10,6 +10,8 @@ import { FaHeart } from "react-icons/fa";
 import {  toast } from "react-toastify";
 
 export default function CathogaryPage(){
+  const URL = process.env.REACT_APP_URL;
+
  const navigate=useNavigate();
  const isLoggend=useSelector((state)=>state.auth.isLoggedIn);
  const role=useSelector((state)=>state.auth.role)
@@ -18,7 +20,7 @@ export default function CathogaryPage(){
   const [Data,setData]=useState("");
    useEffect(()=>{
      const fetchData=async()=>{
-       const response=await axios.get("http://localhost:8000/get-recent-book");
+       const response=await axios.get( `${URL}/get-recent-book`);
        setData(response.data.data);
      }
      fetchData();
@@ -30,7 +32,7 @@ export default function CathogaryPage(){
    const handleCart=async(id)=>{
     console.log(id)
     if(isLoggend === true && role==="user"){
-      const response=await axios.put("/add-to-cart",{},{
+      const response=await axios.put(`${URL}/add-to-cart`,{},{
         headers:{
           id:localStorage.getItem("id"),
           authorization:`Bearer ${localStorage.getItem("token")}`,
@@ -58,7 +60,7 @@ export default function CathogaryPage(){
       ...prev,
       [id]: !prev[id], // सिर्फ उसी प्रोडक्ट का favorite टॉगल होगा
     }));
-      const response=await axios.put("/add-to-fav",{},{
+      const response=await axios.put(`${URL}/add-to-fav`,{},{
         headers:{
           id:localStorage.getItem("id"),
           authorization:`Bearer ${localStorage.getItem("token")}`,

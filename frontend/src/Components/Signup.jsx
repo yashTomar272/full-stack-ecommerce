@@ -11,6 +11,7 @@ import {  toast } from "react-toastify";
 export default function Loginpage() {
  const navigate=useNavigate();
   const [Show, setShow] = useState(true);
+  const URL = process.env.REACT_APP_URL;
   const handleShow = () => {
     setShow(!Show);
   };
@@ -36,7 +37,7 @@ const submit = async (e) => {
       return;
     }
 
-    const response = await axios.post("http://localhost:8000/signup", values);
+    const response = await axios.post( `${URL}/signup` , values);
     if(response.status===200){
       toast.success(response.data.message)
     }else{

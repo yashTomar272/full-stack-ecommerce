@@ -6,10 +6,11 @@ import {  toast } from "react-toastify";
 function Setting() {
   const [Value,setValue]=useState({address:""});
   const [ProfileData,setProfileData]=useState()
+  const URL = process.env.REACT_APP_URL;
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await axios.get("/get-user-information", {
+        const response = await axios.get( `${URL}/get-user-information`, {
           headers: {
             id: localStorage.getItem("id"),
             authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -29,7 +30,7 @@ function Setting() {
     setValue({...Value,[name]:value})
   }
   const changeAddress=async()=>{
-    const response = await axios.put("/update-address",
+    const response = await axios.put( `${URL}/update-address`,
       Value,
       {
       headers: {

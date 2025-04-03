@@ -16,12 +16,12 @@ export default function ProductByCath(){
  const isLoggend=useSelector((state)=>state.auth.isLoggedIn);
  const role=useSelector((state)=>state.auth.role)
  const [heart,setHert]=useState("")
-
+ const URL = process.env.REACT_APP_URL;
 
   const [Data,setData]=useState("");
    useEffect(()=>{
      const fetchData=async()=>{
-       const response=await axios.get(`http://localhost:8000/get-books-by-category/${category}`);
+       const response=await axios.get(`${URL}/get-books-by-category/${category}`);
        setData(response.data.data);
      }
      fetchData();
@@ -29,7 +29,7 @@ export default function ProductByCath(){
  
    const handleCart=async(id)=>{
     if(isLoggend === true && role==="user"){
-      const response=await axios.put("/add-to-cart",{},{
+      const response=await axios.put(`${URL}/add-to-cart`,{},{
         headers:{
           id:localStorage.getItem("id"),
           authorization:`Bearer ${localStorage.getItem("token")}`,
@@ -55,7 +55,7 @@ export default function ProductByCath(){
         ...prev,
         [id]: !prev[id], // सिर्फ उसी प्रोडक्ट का favorite टॉगल होगा
       }));
-      const response=await axios.put("/add-to-fav",{},{
+      const response=await axios.put(`${URL}/add-to-fav`,{},{
        headers:{
           id:localStorage.getItem("id"),
           authorization:`Bearer ${localStorage.getItem("token")}`,

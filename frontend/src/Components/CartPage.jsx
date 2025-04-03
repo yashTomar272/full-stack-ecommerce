@@ -16,14 +16,16 @@ import Loader from "./Loader";
 import {  toast } from "react-toastify";
 
 export default function CartPage() {
-  const navigate=useNavigate();
+  const URL = process.env.REACT_APP_URL;
 
+  const navigate=useNavigate();
+  
  const [cartItems,setcartItems]=useState([]);
  const [Total,setTotal]=useState(0);
  useEffect(() => {
   const fetchCart = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/get-to-cart", {
+      const response = await axios.get(`${URL}/get-to-cart`, {
         headers: {
           id: localStorage.getItem("id"),
           authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -38,7 +40,7 @@ export default function CartPage() {
 }, [cartItems]);
 
 const deleteItem=async(bookid)=>{
-  const response = await axios.put(`/delete-to-cart/${bookid}`,{}, {
+  const response = await axios.put(`${URL}/delete-to-cart/${bookid}`,{}, {
     headers: {
       id: localStorage.getItem("id"),
       authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -66,8 +68,7 @@ useEffect(()=>{
 
 const PlaceOrder = async () => {
   try {
-    const response = await axios.post(
-     "/place-orders ",
+    const response = await axios.post( `${URL}/place-orders`,
       { order: cartItems }, 
       {
         headers: {

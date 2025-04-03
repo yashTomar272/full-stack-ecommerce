@@ -9,9 +9,10 @@ export default function UserDetail(){
   
   const [Data,setData]=useState([]);
    const [date,setDate]=useState([]);
+   const URL = process.env.REACT_APP_URL;
    useEffect(()=>{
      const fetchData=async()=>{
-       const response=await axios.get("/get-all-user");
+       const response=await axios.get(`${URL}/get-all-user`);
        const datesArray = response.data.data.map((book) => {
         return new Date(book.createdAt).toLocaleDateString("en-US", {
           month: "short",

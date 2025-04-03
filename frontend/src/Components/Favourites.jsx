@@ -8,11 +8,12 @@ import {  toast } from "react-toastify";
 function Favourites() {
   const navigate = useNavigate();
   const [Fav, setFav] = useState([]);
+  const URL = process.env.REACT_APP_URL;
 
   useEffect(() => {
     const fetchFav = async () => {
       try {
-        const response = await axios.get("/get-to-fav", {
+        const response = await axios.get(`${URL}/get-to-fav`, {
           headers: {
             id: localStorage.getItem("id"),
             authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -28,8 +29,8 @@ function Favourites() {
 
   const handleRemoveProduct = async (bookId) => {
     try {
-      const response = await axios.put(
-        "/delete-to-fav",
+      const response = await axios.put(`${URL}/delete-to-fav`
+        ,
         {},
         {
           headers: {

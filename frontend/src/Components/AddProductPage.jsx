@@ -5,6 +5,7 @@ import {  toast } from "react-toastify";
 
 
  export default function AddProductPage(){
+  const URL = process.env.REACT_APP_URL;
    const navigate=useNavigate()
  const [Data,setData]=useState({
   title:"",
@@ -45,7 +46,8 @@ if(
 ){
   alert("All fields are required")
 }
-const response=await axios.post("http://localhost:8000/add-book",
+
+const response=await axios.post(`${URL}/add-book`,
   Data,
 {headers});
 setData({

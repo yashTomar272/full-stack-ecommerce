@@ -11,11 +11,13 @@ import Loader from "./Loader";
 function Order() {
   const [Data, setData] = useState([])
   const [date,setDate]=useState([]);
+const URL = process.env.REACT_APP_URL;
+
 const navigate=useNavigate();
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/get-orders-history", {
+        const response = await axios.get(`${URL}/get-orders-history`, {
           headers: {
             id: localStorage.getItem("id"),
             authorization: `Bearer ${localStorage.getItem("token")}`

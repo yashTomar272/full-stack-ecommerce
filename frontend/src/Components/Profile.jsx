@@ -21,7 +21,7 @@ export default function Profile(){
   const navigate=useNavigate();
   const role=useSelector((state)=>state.auth.role);
     const [date,setDate]=useState([]);
-  
+    const URL = process.env.REACT_APP_URL;
 
   // const isLoggedIn=useSelector();
 const headers={
@@ -31,7 +31,7 @@ const headers={
 const [profile,setProfile]=useState();
   useEffect(()=>{
      const fetch=async()=>{
-const response=await axios.get("http://localhost:8000/get-user-information",{headers});
+const response=await axios.get( `${URL}/get-user-information`,{headers});
 
    const hhdate=new Date( response.data.createdAt).toLocaleDateString("en-US", {
     month: "short",

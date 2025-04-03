@@ -16,13 +16,14 @@ import { toast } from "react-toastify";
 export default function ProductInfo() {
   const navigate=useNavigate();
   const [heart,setHert]=useState("")
+  const URL = process.env.REACT_APP_URL;
  const isLoggend=useSelector((state)=>state.auth.isLoggedIn);
 const role=useSelector((state)=>state.auth.role)
   const { id } = useParams();  
 const [Data,setData]=useState();
 useEffect(()=>{
   const fetchData=async()=>{
-    const response=await axios.get(`http://localhost:8000/get-book-by-id/${id}`);
+    const response=await axios.get(`${URL}/get-book-by-id/${id}`);
     setData(response.data.data);
     
 
@@ -39,7 +40,7 @@ useEffect(()=>{
 
   if(isLoggend === true && role==="user"){
   setHert(!heart);
-    const response=await axios.put("http://localhost:8000/add-to-fav",{},{headers});
+    const response=await axios.put(`${URL}/add-to-fav`,{},{headers});
     if(response.status===200){
         toast.success(response.data.message)
       }else{
@@ -52,7 +53,7 @@ useEffect(()=>{
  }
  const handleCart=async()=>{
   if(isLoggend === true && role==="user"){
-    const response=await axios.put("/add-to-cart",{},{headers});
+    const response=await axios.put(`${URL}/add-to-cart`,{},{headers});
     if(response.status===200){
         toast.success(response.data.message)
       }else{
