@@ -13,7 +13,7 @@ export default function (){
  const [Options,setOptions]=useState();
 const [Values, setValues] = useState({status:""})
 const URL = process.env.REACT_APP_URL;
-console.log("data",Data)
+
   useEffect(()=>{
     const fetchData=async()=>{
       const response=await axios.get( `${URL}/get-all-orders`,{
@@ -30,7 +30,7 @@ console.log("data",Data)
        });
      });
    setDate(datesArray)
-   console.log("hello",response.data.data)
+   
       setData(response.data.data);
     }
     fetchData();

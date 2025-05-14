@@ -3,8 +3,8 @@
 
 import { useEffect, useState } from "react";
 
-
 import { loadStripe } from "@stripe/stripe-js";
+
 
 import { MdDeleteOutline } from "react-icons/md";
 import { FaIndianRupeeSign } from "react-icons/fa6";
@@ -17,6 +17,7 @@ import {  toast } from "react-toastify";
 
 export default function CartPage() {
   const URL = process.env.REACT_APP_URL;
+  const stripePromise = loadStripe("pk_test_51Qf1VfRvKnbQ5boup1Z0bzdNFrFI5TA3pIpEPWszraHDPe6yGcFFQRLXL1ZbwSNTGn1C7xfwtmzYn86poVC5GEd800bwUaccBc");
 
   const navigate=useNavigate();
   
@@ -67,23 +68,43 @@ useEffect(()=>{
 },[cartItems])
 
 const PlaceOrder = async () => {
-  try {
-    const response = await axios.post( `${URL}/place-orders`,
-      { order: cartItems }, 
-      {
-        headers: {
-          id: localStorage.getItem("id"),
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
+  const stripe = await stripePromise;
 
-    if(response.status===200){
-      toast.success(response.data.message)
-    }else{
-    toast.error(response.data.message)
-    }
-    navigate("/");
+  
+  try {
+   
+
+    const res = await fetch("http://localhost:8000/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cartItems }), 
+    });
+  
+    const session = await res.json();
+  
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+    
+    
+      // const response = await axios.post( `${URL}/place-orders`,
+      //   { order: cartItems }, 
+      //   {
+      //     headers: {
+      //       id: localStorage.getItem("id"),
+      //       authorization: `Bearer ${localStorage.getItem("token")}`,
+      //     },
+      //   }
+      // );
+      // if(response.status===200){
+      //   toast.success(response.data.message)
+      // }else{
+      // toast.error(response.data.message)
+      // }
+    
+  
   } catch (err) {
     console.log("Error:", err); // Error message ko log karo
   }

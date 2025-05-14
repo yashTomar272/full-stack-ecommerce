@@ -10,6 +10,10 @@ const RR = require("./routes/book");
 const ff = require("./routes/favourite");
 const cc = require("./routes/cart");
 const rr = require("./routes/order");
+const ss = require("./stripe/createCheckoutSession");
+
+
+
 
 const PORT = process.env.PORT || 8000;
 
@@ -23,6 +27,7 @@ app.use(RR);
 app.use(ff);
 app.use(cc);
 app.use(rr);
+app.use(ss);
 
 // Test Route
 app.get("/", (req, res) => {

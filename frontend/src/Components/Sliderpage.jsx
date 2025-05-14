@@ -15,7 +15,10 @@ export default function Sliderpage() {
     </>
   );
 }
+// by raj goyat
 function UncontrolledExample() {
+ 
+// end raj goyat
   return (
     <Carousel className="homepage">
       <Carousel.Item>

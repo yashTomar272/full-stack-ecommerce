@@ -28,6 +28,10 @@ import UpdateProductPage from './Components/UpdateProductPage';
 import ProductByCath from './Components/ProductByCath';
 import WelcomePage from './Components/WelcomePage';
 import Nopage from './Components/Nopage';
+import Hello from './Components/Hello';
+import Cancel from './Components/Cancel';
+import Success from './Components/Success';
+
 
 function App() {
   const dispatch=useDispatch();
@@ -60,7 +64,10 @@ dispatch(authActions.changeRole(localStorage.getItem("role")))
      < Routes>
 
 <Route exact path="/"  element={showWelcomePage ? <WelcomePage />: <Home/>} />
+<Route path="/success" element={<Success />} />
+<Route path="/cancel" element={<Cancel />} />
 <Route  path="/AllProduct" element={ <AllProduct/>} />
+<Route  path="/Hello" element={ <Hello/>} />
 <Route  path="/Login" element={ <Loginpage/>} />
 <Route  path="/Signup" element={ <Signup/>} />
 <Route path="/*" element={<Nopage />} />
