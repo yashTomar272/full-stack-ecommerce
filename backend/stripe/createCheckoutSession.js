@@ -1,6 +1,6 @@
 const router=require("express").Router();
 const Stripe = require("stripe");
- const URL = process.env.WEB_URL;
+
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -20,13 +20,13 @@ router.post("/create-checkout-session", async (req, res) => {
       },
       quantity: 1,
     }));
-    const successUrl = `${WEB_URL}/success?cartItems=${encodeURIComponent(JSON.stringify(cartItems))}`;
+    const successUrl = `https://full-stack-ecommerce-kappa-eight.vercel.app/success?cartItems=${encodeURIComponent(JSON.stringify(cartItems))}`;
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
       success_url: successUrl,
-      cancel_url:`${WEB_URL}/cancel`
+      cancel_url: "https://full-stack-ecommerce-kappa-eight.vercel.app/cancel",
     });
   
     res.json({
