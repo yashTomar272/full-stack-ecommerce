@@ -74,7 +74,7 @@ const PlaceOrder = async () => {
   try {
    
 
-    const res = await fetch("http://localhost:8000/create-checkout-session", {
+    const res = await fetch("https://full-stack-ecommerce-daos.vercel.app/create-checkout-session", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
