@@ -19,13 +19,13 @@ router.post("/create-checkout-session", async (req, res) => {
       },
       quantity: 1,
     }));
-    const successUrl = `http://localhost:3000/success?cartItems=${encodeURIComponent(JSON.stringify(cartItems))}`;
+    const successUrl = `https://full-stack-ecommerce-kappa-eight.vercel.app/success?cartItems=${encodeURIComponent(JSON.stringify(cartItems))}`;
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
       success_url: successUrl,
-      cancel_url: "http://localhost:3000/cancel",
+      cancel_url: "https://full-stack-ecommerce-kappa-eight.vercel.app/cancel",
     });
   
     res.json({
