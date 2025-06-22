@@ -36,7 +36,7 @@ const submit = async (e) => {
 
   try {
     if (!values.username  || !values.password ) {
-      toast.succes("All fields are required");
+      toast.success("All fields are required");
       return;
     }
 
