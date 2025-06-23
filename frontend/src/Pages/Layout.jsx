@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AdminDashboard from '../Components/AdminDashboard'
 
 export default function Layout({children}){
+  console.log("chil",children)
   const role = useSelector((state)=>state.auth.role);
  
   return(

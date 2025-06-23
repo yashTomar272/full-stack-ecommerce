@@ -8,7 +8,7 @@ import logo from '../img/logooo.png';
 import axios from 'axios';
 import {  toast } from "react-toastify";
 
-export default function Loginpage() {
+export default function Signup() {
  const navigate=useNavigate();
   const [Show, setShow] = useState(true);
   const URL = process.env.REACT_APP_URL;

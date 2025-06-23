@@ -1,9 +1,8 @@
 import React, { useEffect,useState } from 'react'
 import Home from './Pages/Home'
-import Order from './Components/Order'
-import Setting from './Components/Setting'
+
 import AllProduct from './Components/AllProduct';
-import Favourites from './Components/Favourites';
+
 import Loginpage from './Components/Loginpage';
 import Signup from './Components/Signup';
 import ProductInfo from './Components/ProductInfo';
@@ -14,11 +13,8 @@ import "./App.css"
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import {
-    BrowserRouter as Router,
-    Route,
-    Routes,
-  } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from './store/auth';
 import Profile from './Components/Profile';
@@ -28,7 +24,6 @@ import UpdateProductPage from './Components/UpdateProductPage';
 import ProductByCath from './Components/ProductByCath';
 import WelcomePage from './Components/WelcomePage';
 import Nopage from './Components/Nopage';
-import Hello from './Components/Hello';
 import Cancel from './Components/Cancel';
 import Success from './Components/Success';
 
@@ -63,11 +58,11 @@ dispatch(authActions.changeRole(localStorage.getItem("role")))
 
      < Routes>
 
-<Route exact path="/"  element={showWelcomePage ? <WelcomePage />: <Home/>} />
+<Route exact path="/" element={<Home />} />
+
 <Route path="/success" element={<Success />} />
 <Route path="/cancel" element={<Cancel />} />
 <Route  path="/AllProduct" element={ <AllProduct/>} />
-<Route  path="/Hello" element={ <Hello/>} />
 <Route  path="/Login" element={ <Loginpage/>} />
 <Route  path="/Signup" element={ <Signup/>} />
 <Route path="/*" element={<Nopage />} />
