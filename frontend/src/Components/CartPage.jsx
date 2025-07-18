@@ -111,7 +111,15 @@ const PlaceOrder = async () => {
 };
 
 
-
+ const TruncateTexttt = ({ text }) => {
+ 
+  if (text.length <= 59) {
+    return <span className="m-0 p-0">{text}</span>;
+  } else {
+    return <h6 className="m-0 p-0">{text.substring(0, 60)}...</h6>;
+  }
+};
+ 
   return (
     <>
       <Layout>
@@ -144,7 +152,7 @@ const PlaceOrder = async () => {
                             style={{ width: "80px",height:"80px" }}
                           />
                           <div>
-                            <h4 className="pb-0 mb-0">{val.title}</h4>
+                            <h4 className="pb-0 mb-0"><TruncateTexttt text={val.title}/></h4>
                             <span
                               className="d-flex gap-4 mb-0 pb-0"
                               style={{ color: "#d4d3d3" }}

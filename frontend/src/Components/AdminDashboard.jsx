@@ -25,8 +25,7 @@ export default function AdminDashboard() {
    const role=useSelector((state)=>state.auth.role);
  const [TotalOrder, setTotalOrder] = useState()
 
-   const [Name,setName]=useState();
-   const [Email,setEmail]=useState();
+   const [profile,setProfile]=useState([]);
 const [count,setCount]=useState("")
    const headers={
     id:localStorage.getItem("id"),
@@ -34,18 +33,17 @@ const [count,setCount]=useState("")
   }
   useEffect(()=>{
      const fetch=async()=>{
-const response=await axios.get(`${URL}/get-user-information`,{headers});
+const response=await axios.get( `${URL}/get-user-information`,{headers});
 const Response=await axios.get(`${URL}/get-all-book`);
 const tuser=await axios.get(`${URL}/get-all-user`);
 const OrderRes=await axios.get(`${URL}/get-all-orders`,{headers});
 setTotalOrder(OrderRes.data.data.length);
 setTotalUser(tuser.data.data.length)
 setCount(Response.data.data.length);
-setName(response.data.username);
-setEmail(response.data.email);
+setProfile(response.data);
      }
      fetch();
-  },[])
+  },[URL])
 
  
 
@@ -90,12 +88,12 @@ setEmail(response.data.email);
             <div className="d-flex gap-2">
               {" "}
               <h6>Name :</h6>
-              <span>{Name}</span>
+              <span>{profile.username}</span>
             </div>
             <div className="d-flex gap-2">
               {" "}
               <h6>Email :</h6>
-              <span>{Email}</span>
+              <span>{profile.email}</span>
             </div>
            
             <div className="d-flex gap-2">

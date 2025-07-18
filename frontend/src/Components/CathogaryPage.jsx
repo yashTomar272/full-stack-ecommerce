@@ -79,6 +79,14 @@ export default function CathogaryPage(){
     }
 
    }
+   const TruncateTexttt = ({ text }) => {
+ 
+  if (text.length <= 59) {
+    return <span className="m-0 p-0">{text}</span>;
+  } else {
+    return <h6 className="m-0 p-0">{text.substring(0, 60)}...</h6>;
+  }
+};
  
   return(
     
@@ -96,7 +104,7 @@ export default function CathogaryPage(){
             <div className=" h-50 w-100 dalju p-1 "><img  className="card-img-top h-100 w-100" onClick={()=>navigate(`/ProductInfo/${item._id}`)} src={item.url} alt="Card image cap"  style={{objectFit:"contain"}}/></div>
              <div className="card-body position-relative" style={{cursor:"pointer"}}>
                <p className="card-title" style={{color:"gray"}}>Buy Smart</p>
-               <h6 className="card-text">{item.title} raj found</h6>
+               <h6 className="card-text"><TruncateTexttt text={item.title} /></h6>
                <h5><MdCurrencyRupee/>{item.price}</h5>
                <button
                  className="btnn fw-bold w-100 mt-2"

@@ -34,31 +34,39 @@ export default function Success() {
   // 2. Place order only once after cartItems is loaded
  
     const placeOrder = async () => {
-      if (cartItems.length === 0 || orderPlaced) return;
+  console.log("done");
 
-      try {
-        const response = await axios.post(`${URL}/place-orders`,
-          { order: cartItems },
-          {
-            headers: {
-              id: localStorage.getItem("id"),
-              authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+  if (cartItems.length === 0) {
+    console.log("Cart is empty, navigating home.");
+    return navigate("/"); // empty cart hone par bhi redirect karo
+  }
 
-        if (response.status === 200) {
-          toast.success(response.data.message);
-          setOrderPlaced(true); // ✅ prevent repeat call
-        } else {
-          toast.error(response.data.message);
-        }
-      } catch (error) {
-        console.error("Order placement error:", error);
-        toast.error("Failed to place order.");
+  if (orderPlaced) return;
+
+  try {
+    const response = await axios.post(`${URL}/place-orders`,
+      { order: cartItems },
+      {
+        headers: {
+          id: localStorage.getItem("id"),
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       }
-      navigate("/");
-    };
+    );
+
+    if (response.status === 200) {
+      toast.success(response.data.message);
+      setOrderPlaced(true);
+      navigate("/"); // navigate successful order ke baad
+    } else {
+      toast.error(response.data.message);
+    }
+  } catch (error) {
+    console.error("Order placement error:", error);
+    toast.error("Failed to place order.");
+  }
+};
+
 
   
 
@@ -67,12 +75,15 @@ export default function Success() {
       <img src={gif} alt="gif_img" className="img-fluid" />
       <h2>Your Payment Was Successful.</h2>
       <button
-        className="btn fs-4 px-3 py-1 rounded-pill text-white"
-        style={{ background: "rgb(31, 212, 40)" }}
-        onClick={placeOrder}
-      >
-        Home
-      </button>
+  className="btn fs-4 px-3 py-1 rounded-pill text-white"
+  style={{ background: "rgb(31, 212, 40)" }}
+  onClick={() => {
+    console.log("clicked");
+    placeOrder();
+  }}
+>
+  Home
+</button>
     </div>
   );
 }

@@ -18,8 +18,8 @@ export default function Cathogary() {
     { img: cath4, name: "Mobile" },
     { img: cath5, name: "Laptop" },
     { img: cath6, name: "Shoes" },
-    { img: cath7, name: "Books" },
-    { img:cath8, name: "Home" },
+    { img: cath8, name: "Books" },
+    { img:cath7, name: "Home" },
   ];
 
 
